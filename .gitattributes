@@ -1,0 +1,18 @@
+# Automatically detect text files.
+* text=auto
+
+# Source code and documentation: always use Unix LF endings.
+*.py text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# OpenFOAM dictionaries and field files often have no extension.
+openfoam/** text eol=lf
+
+# Repository configuration files.
+.gitignore text eol=lf
+.gitattributes text eol=lf
+requirements.txt text eol=lf

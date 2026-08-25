@@ -1,0 +1,37 @@
+# Python cache / compiled files
+__pycache__/
+*.py[cod]
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Logs
+*.log
+log.*
+
+# Generated body profiles
+profiles/
+
+# Generated OpenFOAM outputs
+processor*/
+postProcessing/
+log.*
+*.foam
+
+# Generated meshes and case outputs
+constant/polyMesh/
+*.msh
+*.geo
