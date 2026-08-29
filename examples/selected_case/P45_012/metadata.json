@@ -1,0 +1,20 @@
+{
+    "body_id": "P45_012",
+    "lambda": 3.8,
+    "length": 0.532,
+    "R": 0.07,
+    "r_max": 0.07,
+    "weights": {
+        "w0": 0.5,
+        "w1": 1.5,
+        "w2": 1.0,
+        "w3": 0.5
+    },
+    "n_samples": 101,
+    "phase45_generation": {
+        "slot_id": "GC",
+        "engineering_purpose": "Sparse corner: low \u03bb + high w\u2081 + low w\u2083",
+        "sampling_method": "engineering_guided_space_filling",
+        "generated_at": "2026-08-01T04:23:07.013888+00:00"
+    }
+}
