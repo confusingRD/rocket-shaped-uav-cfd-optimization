@@ -22,16 +22,23 @@ Thumbs.db
 *.log
 log.*
 
-# Generated body profiles
-profiles/
+# Generated geometry / campaign runtime data
+/profiles/
+/cases/
+/results/
+/campaign_state/
+
+# Runtime SQLite database
+/data/production.db
+/data/*.db-journal
+/data/*.db-wal
+/data/*.db-shm
 
 # Generated OpenFOAM outputs
 processor*/
 postProcessing/
-log.*
 *.foam
 
-# Generated meshes and case outputs
+# Generated meshes
 constant/polyMesh/
 *.msh
-*.geo
