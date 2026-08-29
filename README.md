@@ -478,7 +478,7 @@ The complete CFD workflow is therefore intended to run in a Linux-compatible env
 
 Detailed reproduction instructions are provided in:
 
-`[docs/reproducibility.md](docs/reproducibility.md)`
+[Reproducibility guide](docs/reproducibility.md)
 
 ---
 
@@ -491,12 +491,12 @@ More detailed technical documentation is available here:
 
 | Document                                            | Description                                                          |
 | --------------------------------------------------- | -------------------------------------------------------------------- |
-| `[Methodology](docs/methodology.md)`                | CST, DOE strategy, CFD configuration, and refinement methodology     |
-| `[Numerical Verification](docs/validation.md)`      | Mesh independence, y⁺, compressibility, convergence, and limitations |
-| `[Results](docs/results.md)`                        | Final ranking, parameter trends, and P45_012                         |
-| `[Reproducibility](docs/reproducibility.md)`        | Environment requirements and workflow reproduction                   |
-| `[Selected Case](examples/selected_case/README.md)` | Lightweight P45_012 reproduction example                             |
-| `[Dataset](data/README.md)`                         | Description of the authoritative 130-case dataset                    |
+| [Methodology](docs/methodology.md)                  | CST, DOE strategy, CFD configuration, and refinement methodology     |
+| [Numerical Verification](docs/validation.md)        | Mesh independence, y⁺, compressibility, convergence, and limitations |
+| [Results](docs/results.md)                          | Final ranking, parameter trends, and P45_012                         |
+| [Reproducibility](docs/reproducibility.md)          | Environment requirements and workflow reproduction                   |
+| [Selected Case](examples/selected_case/README.md)   | Lightweight P45_012 reproduction example                             |
+| [Dataset](data/README.md)                           | Description of the authoritative 130-case dataset                    |
 
 
 ---
@@ -561,7 +561,7 @@ The emphasis is therefore not only on obtaining a lower-drag body, but also on b
 
 The authoritative final dataset contains all 130 configurations:
 
-`[data/authoritative_dataset_130.csv](data/authoritative_dataset_130.csv)`
+[View the authoritative 130-case dataset](data/authoritative_dataset_130.csv)
 
 Each row records information including:
 

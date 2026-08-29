@@ -15,7 +15,7 @@ All configurations were evaluated using the same production CFD methodology and 
 
 The complete numerical dataset is available at:
 
-`data/authoritative_dataset_130.csv`
+[View the authoritative 130-case dataset](../data/authoritative_dataset_130.csv)
 
 The results should primarily be interpreted as **relative aerodynamic comparisons within the common CFD setup**, rather than experimentally validated absolute drag predictions.
 
@@ -151,7 +151,7 @@ rather than as a mathematically proven global optimum of the continuous CST desi
 
 Lightweight geometry inputs for this configuration are available under:
 
-`examples/selected_case/P45_012/`
+[View the P45_012 selected case](../examples/selected_case/P45_012/)
 
 ---
 
@@ -406,7 +406,7 @@ Therefore, P45_012 is appropriately described as the **best observed candidate f
 
 The distinction between campaign completion and numerical convergence is discussed in more detail in:
 
-`docs/validation.md`
+[Read the numerical verification and validation discussion](validation.md)
 
 ---
 
@@ -500,22 +500,8 @@ This would help determine whether the relatively small differences among the hig
 
 ## Related Documentation
 
-The research strategy and CFD methodology are described in:
-
-`docs/methodology.md`
-
-Numerical verification, compressibility sensitivity, and limitations are discussed in:
-
-`docs/validation.md`
-
-Instructions for reproducing the computational workflow are provided in:
-
-`docs/reproducibility.md`
-
-The complete ranked dataset is available at:
-
-`data/authoritative_dataset_130.csv`
-
-The selected P45_012 geometry is available under:
-
-`examples/selected_case/P45_012/`
+- [Methodology](methodology.md) — CST parameterization, CFD setup, design-space sampling, and refinement strategy
+- [Numerical Verification and Validation](validation.md) — mesh independence, compressibility sensitivity, convergence, and numerical limitations
+- [Reproducibility](reproducibility.md) — software requirements and computational workflow reproduction
+- [Authoritative Dataset](../data/authoritative_dataset_130.csv) — complete ranked dataset for all 130 simulated configurations
+- [Selected P45_012 Case](../examples/selected_case/P45_012/) — lightweight geometry inputs for the best observed configuration

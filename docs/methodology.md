@@ -37,7 +37,7 @@ The final curated dataset contains **130 simulated configurations**:
 
 The complete dataset is available at:
 
-`data/authoritative_dataset_130.csv`
+[View the authoritative 130-case dataset](../data/authoritative_dataset_130.csv)
 
 ---
 
@@ -75,11 +75,11 @@ with the CST coefficients sampled on the discrete design grid used by the campai
 
 Geometry-generation code is located under:
 
-`src/geometry/`
+[Browse the geometry-generation code](../src/geometry/)
 
 The selected final candidate is provided as a lightweight example under:
 
-`examples/selected_case/P45_012/`
+[View the P45_012 selected case](../examples/selected_case/P45_012/)
 
 ---
 
@@ -141,11 +141,11 @@ The major software components are:
 
 Campaign orchestration is implemented under:
 
-`src/campaign/`
+[Browse the campaign-management code](../src/campaign/)
 
 Reporting and analysis tools are located under:
 
-`src/reporting/`
+[Browse the reporting and analysis code](../src/reporting/)
 
 ---
 
@@ -259,7 +259,7 @@ The production mesh contains on the order of several hundred thousand cells, wit
 
 Mesh-independence evidence and the limitations associated with the near-wall resolution are discussed separately in:
 
-`docs/validation.md`
+[Read the numerical verification and validation discussion](validation.md)
 
 ---
 
@@ -293,7 +293,7 @@ This stage produced the final best-observed configuration:
 
 The geometry and lightweight reproduction inputs for this case are included under:
 
-`examples/selected_case/`
+[View the selected-case example](../examples/selected_case/)
 
 ---
 
@@ -333,14 +333,8 @@ The workflow is designed primarily for:
 
 The methodology does not claim experimental validation of the absolute drag coefficient.
 
-Numerical verification and model limitations are documented in:
+For additional technical details:
 
-`docs/validation.md`
-
-Final aerodynamic trends and the selected configuration are summarized in:
-
-`docs/results.md`
-
-Instructions for reproducing the workflow are provided in:
-
-`docs/reproducibility.md`
+- [Numerical Verification and Validation](validation.md) — mesh independence, compressibility sensitivity, convergence, and numerical limitations
+- [Results](results.md) — final ranking, design-variable trends, and the selected P45_012 configuration
+- [Reproducibility](reproducibility.md) — software requirements and instructions for reproducing the workflow

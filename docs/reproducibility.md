@@ -16,7 +16,7 @@ The repository supports several different levels of reproduction.
 
 The final ranked numerical dataset is available directly at:
 
-`data/authoritative_dataset_130.csv`
+[View the authoritative 130-case dataset](../data/authoritative_dataset_130.csv)
 
 No CFD software is required to inspect this file.
 
@@ -30,11 +30,11 @@ No OpenFOAM installation is required for this step.
 
 The CST geometry-generation code is included under:
 
-`src/geometry/`
+[Browse the geometry-generation code](../src/geometry/)
 
 A lightweight representation of the selected P45_012 geometry is provided under:
 
-`examples/selected_case/P45_012/`
+[View the P45_012 selected case](../examples/selected_case/P45_012/)
 
 ### Level 4 — Execute the CFD workflow
 
@@ -97,7 +97,7 @@ Generated runtime directories such as `profiles/`, `cases/`, `results/`, and `ca
 
 The curated Python code uses the dependencies listed in:
 
-`requirements.txt`
+[View `requirements.txt`](../requirements.txt)
 
 The current requirements are:
 
@@ -300,7 +300,7 @@ The directory deliberately contains geometry inputs rather than the complete gen
 
 Additional details are provided in:
 
-`examples/selected_case/README.md`
+[Read the selected-case documentation](../examples/selected_case/README.md)
 
 ---
 
@@ -328,13 +328,13 @@ Gmsh mesh
 
 The CST implementation is located under:
 
-`src/geometry/`
+[Browse the geometry-generation code](../src/geometry/)
 
 The conversion between a profile CSV and the Gmsh wedge-domain definition is implemented in:
 
-`src/csv_to_geo.py`
+[`src/csv_to_geo.py`](../src/csv_to_geo.py)
 
-The selected example already includes both:
+The selected P45_012 example already includes both:
 
 ```text
 profile.csv
@@ -343,9 +343,9 @@ profile.geo
 
 so the relationship between the numerical profile and the generated Gmsh geometry can be inspected directly.
 
+[View the selected P45_012 geometry files](../examples/selected_case/P45_012/)
+
 ---
-
-
 
 ## 10. Regenerating a Gmsh Geometry File
 
@@ -355,13 +355,13 @@ The production mesh preset is:
 
 `M4_PRODUCTION`
 
-The conversion follows the form:
+From the repository root, the general command is:
 
 ```bash
 python3 src/csv_to_geo.py <profile.csv> --mesh-level M4_PRODUCTION -o <profile.geo>
 ```
 
-For example, using the selected-case profile:
+For example, using the selected P45_012 profile:
 
 ```bash
 python3 src/csv_to_geo.py \
@@ -370,17 +370,19 @@ python3 src/csv_to_geo.py \
     -o examples/selected_case/P45_012/profile_regenerated.geo
 ```
 
-This step generates the Gmsh geometry description.
+This step generates the Gmsh `.geo` definition.
 
 It does not execute OpenFOAM.
 
 ---
 
-
-
 ## 11. OpenFOAM Template
 
 The reusable production OpenFOAM configuration is stored under:
+
+[Browse the OpenFOAM template case](../openfoam/template_case/)
+
+Its structure is:
 
 ```text
 openfoam/template_case/
@@ -389,7 +391,7 @@ openfoam/template_case/
 └── system/
 ```
 
-It contains the field initialization, turbulence configuration, numerical schemes, solver settings, and force-coefficient configuration used by the production workflow.
+The template contains the field initialization, turbulence configuration, numerical schemes, solver settings, and force-coefficient configuration used by the production workflow.
 
 The principal production setup is:
 
@@ -401,25 +403,19 @@ Iteration budget:     1000
 Wedge angle:          5°
 ```
 
-The template is copied and configured by the campaign workflow for individual geometries rather than manually maintaining a complete independent OpenFOAM setup for every design.
+The campaign workflow copies and configures this reusable template for individual geometries rather than maintaining a separate manually prepared OpenFOAM setup for every design.
 
 ---
 
-
-
 ## 12. Mesh Import Workflow
 
-The shell scripts under `scripts/` handle the interface between the generated Gmsh geometry and OpenFOAM.
+The shell scripts under [`scripts/`](../scripts/) handle the interface between the generated Gmsh mesh and OpenFOAM.
 
-The main roles are:
-
-
-| Script                 | Purpose                                               |
-| ---------------------- | ----------------------------------------------------- |
-| `importMesh.sh`        | Generate/import the Gmsh mesh and perform mesh checks |
-| `setWedgePatches.sh`   | Correct the wedge patch types after mesh import       |
-| `runProductionCase.sh` | Execute a prepared production OpenFOAM case           |
-
+| Script | Purpose |
+|---|---|
+| [`importMesh.sh`](../scripts/importMesh.sh) | Generate/import the Gmsh mesh and perform mesh checks |
+| [`setWedgePatches.sh`](../scripts/setWedgePatches.sh) | Correct the wedge patch types after mesh import |
+| [`runProductionCase.sh`](../scripts/runProductionCase.sh) | Execute a prepared production OpenFOAM case |
 
 Conceptually, the mesh workflow is:
 
@@ -443,15 +439,13 @@ The Python campaign runner invokes these utilities as part of automated case pre
 
 ---
 
-
-
 ## 13. Campaign Management
 
-The production campaign is managed through:
+The production campaign-management code is located under:
 
-`src/campaign/`
+[Browse `src/campaign/`](../src/campaign/)
 
-The command-line interface is:
+The command-line interface can be inspected from the repository root using:
 
 ```bash
 python3 src/campaign/cli.py --help
@@ -470,18 +464,16 @@ plan
 
 Their general purposes are:
 
+| Command | Purpose |
+|---|---|
+| `init` | Initialize campaign state and database |
+| `validate` | Perform pre-run checks |
+| `status` | Display campaign and database status |
+| `plan` | Show which cases would be run or resumed |
+| `run` | Execute the production campaign |
+| `resume` | Continue an interrupted or paused campaign |
 
-| Command    | Purpose                                    |
-| ---------- | ------------------------------------------ |
-| `init`     | Initialize campaign state and database     |
-| `validate` | Perform pre-run checks                     |
-| `status`   | Display campaign and database status       |
-| `plan`     | Show which cases would be run or resumed   |
-| `run`      | Execute the production campaign            |
-| `resume`   | Continue an interrupted or paused campaign |
-
-
-Before launching expensive CFD calculations, the recommended workflow is:
+Before launching CFD calculations, the intended workflow is approximately:
 
 ```text
 init
@@ -493,7 +485,7 @@ plan
 run
 ```
 
-or, after interruption:
+After an interruption:
 
 ```text
 status
@@ -503,17 +495,13 @@ plan
 resume
 ```
 
-The campaign system was designed to preserve execution state so that large CFD batches did not need to restart from the beginning after interruption.
+The campaign system preserves execution state so that completed cases do not need to be rerun when a large campaign is interrupted.
 
 ---
 
-
-
 ## 14. Campaign Runtime Directories
 
-During execution, the workflow creates several directories that are intentionally not committed to Git.
-
-These include:
+During execution, the workflow creates several directories that are intentionally excluded from version control:
 
 ```text
 profiles/
@@ -525,23 +513,19 @@ data/production.db
 
 Their general roles are:
 
+| Directory | Runtime role |
+|---|---|
+| `profiles/` | Generated geometry inputs for campaign bodies |
+| `cases/` | Prepared OpenFOAM case directories |
+| `results/` | Per-case post-processed CFD outputs |
+| `campaign_state/` | Manifest, checkpoints, and campaign controls |
+| `data/production.db` | Runtime SQLite campaign database |
 
-| Directory            | Runtime role                                  |
-| -------------------- | --------------------------------------------- |
-| `profiles/`          | Generated geometry inputs for campaign bodies |
-| `cases/`             | Prepared OpenFOAM case directories            |
-| `results/`           | Per-case post-processed CFD outputs           |
-| `campaign_state/`    | Manifest, checkpoints, and campaign controls  |
-| `data/production.db` | Runtime SQLite campaign database              |
-
-
-These files are reproducible runtime artifacts rather than source files.
+These are runtime artifacts rather than curated source files.
 
 They are excluded through `.gitignore`.
 
 ---
-
-
 
 ## 15. CFD Execution Pipeline
 
@@ -579,8 +563,6 @@ This allows completed cases to be preserved while unfinished or interrupted case
 
 ---
 
-
-
 ## 16. Parallel Execution
 
 The production workflow supports parallel OpenFOAM execution.
@@ -592,7 +574,7 @@ The campaign CLI exposes options such as:
 --cores-per-worker
 ```
 
-The default configuration shown by the current CLI is:
+The current default configuration is:
 
 ```text
 workers          = 2
@@ -601,20 +583,18 @@ cores-per-worker = 6
 
 This corresponds to two simultaneous CFD workers, each using six MPI processes.
 
-These values should not be treated as universal settings.
+These values are not universal settings.
 
 They should be adjusted according to:
 
 - available CPU cores,
-- system memory,
+- available memory,
 - OpenFOAM installation,
 - and desired campaign throughput.
 
 ---
 
-
-
-## 17. Runtime Database
+## 17. Runtime Database and Curated Dataset
 
 The production campaign uses SQLite for persistent state and result storage.
 
@@ -624,23 +604,25 @@ The default runtime database is:
 
 This database is intentionally excluded from version control.
 
-The curated public result of the completed research campaign is instead provided as:
+The curated public result of the completed campaign is instead provided as:
 
-`data/authoritative_dataset_130.csv`
+[View the authoritative 130-case dataset](../data/authoritative_dataset_130.csv)
 
 This separation keeps the repository lightweight while preserving the final numerical evidence used in the published analysis.
 
+The dataset structure is described in:
+
+[Read the dataset documentation](../data/README.md)
+
 ---
-
-
 
 ## 18. Regenerating the Final Statistical Figures
 
-The six principal design-variable result figures can be regenerated directly from the authoritative 130-case dataset.
+The six principal design-variable figures can be regenerated directly from the authoritative 130-case dataset.
 
-The script is:
+The regeneration script is:
 
-`scripts/regenerate_results_figures.py`
+[`scripts/regenerate_results_figures.py`](../scripts/regenerate_results_figures.py)
 
 From the repository root:
 
@@ -650,15 +632,13 @@ From the repository root:
 python scripts\regenerate_results_figures.py
 ```
 
-
-
 ### Linux / WSL
 
 ```bash
 python3 scripts/regenerate_results_figures.py
 ```
 
-The script verifies that the source dataset contains exactly 130 configurations and generates:
+The script verifies that the input dataset contains exactly 130 configurations and generates:
 
 ```text
 figures/results/
@@ -670,41 +650,35 @@ figures/results/
 └── results_spearman_correlation.png
 ```
 
-All six plots are therefore derived directly from:
+All six figures are generated directly from:
 
-`data/authoritative_dataset_130.csv`
+[View `authoritative_dataset_130.csv`](../data/authoritative_dataset_130.csv)
 
-This prevents statistical figures from silently remaining synchronized with an earlier intermediate dataset.
+This helps prevent analysis figures from remaining accidentally synchronized with an earlier intermediate dataset.
 
 ---
-
-
 
 ## 19. Expected D130 Correlation Check
 
 The regenerated Spearman analysis should produce approximately:
 
-
 | Variable | Spearman correlation with C_D |
-| -------- | ----------------------------- |
-| λ        | +0.50                         |
-| w₀       | +0.78                         |
-| w₁       | −0.65                         |
-| w₂       | −0.31                         |
-| w₃       | −0.14                         |
+|---|---:|
+| λ | +0.50 |
+| w₀ | +0.78 |
+| w₁ | −0.65 |
+| w₂ | −0.31 |
+| w₃ | −0.14 |
 
-
-Large differences from these values indicate that:
+Large differences from these values may indicate that:
 
 - a different dataset is being used,
 - the dataset has been modified, or
 - the analysis procedure has changed.
 
-This provides a lightweight numerical sanity check for the final dataset.
+This provides a lightweight numerical sanity check for the final D130 dataset.
 
 ---
-
-
 
 ## 20. Files Intentionally Excluded
 
@@ -737,8 +711,6 @@ The repository instead preserves:
 
 ---
 
-
-
 ## 21. Reproduction Is Not Bitwise Replication
 
 Exact numerical replication may depend on:
@@ -749,16 +721,14 @@ Exact numerical replication may depend on:
 - compiler and numerical libraries,
 - operating system,
 - processor count,
-- floating-point behavior, and
-- stopping behavior.
+- floating-point behavior,
+- and stopping behavior.
 
-Therefore, reproduction should be interpreted as reconstructing the same computational methodology and obtaining consistent aerodynamic behavior, rather than requiring every floating-point value to be bit-for-bit identical across different machines.
+Therefore, reproduction should be interpreted as reconstructing the same computational methodology and obtaining consistent aerodynamic behavior rather than requiring every floating-point value to be bit-for-bit identical across different machines.
 
 For comparative ranking, all candidate geometries should be evaluated using the same software and numerical configuration.
 
 ---
-
-
 
 ## 22. Scientific Interpretation
 
@@ -772,15 +742,13 @@ The present methodology includes known limitations associated with:
 - finite iteration limits,
 - and the absence of experimental drag validation.
 
-These issues are documented in:
+These issues are discussed in detail in:
 
-`docs/validation.md`
+[Read Numerical Verification and Validation](validation.md)
 
 The repository is therefore intended to reproduce the **design-screening methodology and numerical study**, not to claim experimentally validated absolute aerodynamic performance.
 
 ---
-
-
 
 ## 23. Recommended Reproduction Path
 
@@ -816,26 +784,12 @@ Full CFD reproduction requires completing the Linux/WSL environment setup.
 
 ---
 
-
-
 ## Related Documentation
 
-The research methodology is described in:
-
-`docs/methodology.md`
-
-Numerical verification and limitations are documented in:
-
-`docs/validation.md`
-
-The final aerodynamic results are summarized in:
-
-`docs/results.md`
-
-The selected low-drag geometry is provided under:
-
-`examples/selected_case/P45_012/`
-
-The authoritative final dataset is:
-
-`data/authoritative_dataset_130.csv`
+- [Methodology](methodology.md) — CST parameterization, CFD setup, sampling strategy, and design-space refinement
+- [Numerical Verification and Validation](validation.md) — mesh independence, compressibility sensitivity, convergence, and numerical limitations
+- [Results](results.md) — final 130-case ranking, parameter trends, and P45_012
+- [Selected Case](../examples/selected_case/README.md) — documentation for the lightweight P45_012 reproduction example
+- [P45_012 Geometry Files](../examples/selected_case/P45_012/) — selected geometry inputs
+- [Authoritative Dataset](../data/authoritative_dataset_130.csv) — complete ranked dataset for all 130 simulations
+- [Dataset Documentation](../data/README.md) — description of the published CSV fields and interpretation

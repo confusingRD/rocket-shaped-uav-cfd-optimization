@@ -306,7 +306,7 @@ while still producing valid aerodynamic coefficients.
 
 This behavior is intentionally retained in:
 
-`data/authoritative_dataset_130.csv`
+[View the authoritative 130-case dataset](../data/authoritative_dataset_130.csv)
 
 through the fields:
 
@@ -432,18 +432,7 @@ These additions would allow the workflow to progress from comparative design scr
 
 ## Related Documentation
 
-The overall research methodology is described in:
-
-`docs/methodology.md`
-
-The final 130-case aerodynamic results are discussed in:
-
-`docs/results.md`
-
-Instructions for reproducing the computational workflow are provided in:
-
-`docs/reproducibility.md`
-
-The authoritative ranked dataset is available at:
-
-`data/authoritative_dataset_130.csv`
+- [Methodology](methodology.md) — overall research strategy, CST parameterization, CFD setup, and design-space refinement
+- [Results](results.md) — final 130-case ranking, design-variable trends, and P45_012
+- [Reproducibility](reproducibility.md) — software requirements and computational workflow reproduction
+- [Authoritative Dataset](../data/authoritative_dataset_130.csv) — complete ranked dataset for all 130 simulated configurations
